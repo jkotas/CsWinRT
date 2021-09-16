@@ -48,7 +48,9 @@ namespace WinRT
                         if (_comWrappers is null)
                         {
                             var comWrappersToSet = DefaultComWrappersInstance;
+#if !EMBED 
                             ComWrappers.RegisterForTrackerSupport(comWrappersToSet);
+#endif
                             _comWrappers = comWrappersToSet;
                         }
                     }
@@ -64,7 +66,9 @@ namespace WinRT
                         return;
                     }
                     var comWrappersToSet = value ?? DefaultComWrappersInstance; 
+#if !EMBED 
                     ComWrappers.RegisterForTrackerSupport(comWrappersToSet);
+#endif
                     _comWrappers = comWrappersToSet; 
                 }
             }
