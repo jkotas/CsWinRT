@@ -38,9 +38,9 @@
     <file src="$winrt_host_arm64$" target ="runtimes\win-arm64\native"/>
     <file src="$winrt_shim$" target ="lib\net5.0\"/>
     <!-- Add the WinRT.Runtime sources to the pkg for embedded scenarios -->
-    <file src="..\src\WinRT.Runtime\*.cs" target="contentFiles\cs\any" />
-    <file src="..\src\WinRT.Runtime\Interop\*.cs" target="contentFiles\cs\any\Interop" />
-    <file src="..\src\WinRT.Runtime\Projections\*.cs" target="contentFiles\cs\any\Projections" />
+    <file src="..\src\WinRT.Runtime\*.cs" target="contentFiles\cs\any\WinRT.Runtime" />
+    <file src="..\src\WinRT.Runtime\Interop\*.cs" target="contentFiles\cs\any\WinRT.Runtime\Interop" />
+    <file src="..\src\WinRT.Runtime\Projections\*.cs" target="contentFiles\cs\any\WinRT.Runtime\Projections" />
     <file src="$guid_patch$" target ="build\tools\IIDOptimizer"/>
   </files>
 </package>

@@ -24,7 +24,7 @@ namespace WinRT
         /// </returns>
         /// <exception cref="ArgumentException">Thrown if the runtime type of <paramref name="value"/> is not a projected type (if the object is a managed object).</exception>
 #if EMBED
-        protected 
+        internal
 #else
         public
 #endif
@@ -64,7 +64,7 @@ namespace WinRT
         /// </returns>
         /// <exception cref="InvalidOperationException">Thrown if the runtime type of <paramref name="value"/> is not a projected type.</exception>
 #if EMBED
-        protected 
+        internal 
 #else
         public
 #endif

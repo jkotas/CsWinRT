@@ -15,7 +15,12 @@ namespace System.IO
     /// <summary>
     /// Contains extension methods that provide convenience helpers for WinRT IO.
     /// </summary>
-    public static class WindowsRuntimeStorageExtensions
+#if EMBED 
+    internal 
+#else 
+    public 
+#endif 
+    static class WindowsRuntimeStorageExtensions
     {
         // Net5-specific extension methods
 #if !NETSTANDARD2_0

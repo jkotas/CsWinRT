@@ -124,7 +124,7 @@ namespace WinRT
     {
 
 #if EMBED
-        protected
+        internal // protected
 #else
         public
 #endif
@@ -134,7 +134,7 @@ namespace WinRT
         }
 
 #if EMBED
-        protected
+        internal // protected
 #else
         public
 #endif

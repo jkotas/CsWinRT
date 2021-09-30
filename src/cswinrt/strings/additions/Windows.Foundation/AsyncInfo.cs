@@ -18,7 +18,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 #if !NETSTANDARD2_0
     [global::System.Runtime.Versioning.SupportedOSPlatform("windows10.0.10240.0")]
 #endif
-    public static class AsyncInfo
+#if EMBED
+    internal
+#else
+    public
+#endif
+    static class AsyncInfo
     {
         #region Factory methods for creating "normal" IAsyncInfo instances backed by a Task created by a pastProvider delegate
 

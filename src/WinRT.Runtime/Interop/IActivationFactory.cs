@@ -19,7 +19,12 @@ namespace ABI.WinRT.Interop
 {
     [global::WinRT.ObjectReferenceWrapper(nameof(_obj))]
     [Guid("00000035-0000-0000-C000-000000000046")]
-    public unsafe class IActivationFactory : global::WinRT.Interop.IActivationFactory
+#if EMBED 
+    internal
+#else
+    public 
+#endif
+    unsafe class IActivationFactory : global::WinRT.Interop.IActivationFactory
     {
         [Guid("00000035-0000-0000-C000-000000000046")]
         public struct Vftbl

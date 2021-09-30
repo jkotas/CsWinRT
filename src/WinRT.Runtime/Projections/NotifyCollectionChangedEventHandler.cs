@@ -12,7 +12,12 @@ namespace ABI.System.Collections.Specialized
 
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     [Guid("8B0909DC-2005-5D93-BF8A-725F017BAA8D")]
-    public static class NotifyCollectionChangedEventHandler
+#if EMBED
+    internal
+#else
+    public
+#endif
+    static class NotifyCollectionChangedEventHandler
     {
 #if NETSTANDARD2_0
         private unsafe delegate int Abi_Invoke(IntPtr thisPtr, IntPtr sender, IntPtr e);

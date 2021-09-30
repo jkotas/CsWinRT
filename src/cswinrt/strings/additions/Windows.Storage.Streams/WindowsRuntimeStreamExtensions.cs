@@ -17,7 +17,12 @@ namespace System.IO
     /// Contains extension methods for conversion between WinRT streams and managed streams.
     /// This class is the public facade for the stream adapters library.
     /// </summary>
-    public static class WindowsRuntimeStreamExtensions
+#if EMBED
+    internal
+#else
+    public
+#endif
+    static class WindowsRuntimeStreamExtensions
     {
         #region Constants and static Fields
 

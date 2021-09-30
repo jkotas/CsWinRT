@@ -11,7 +11,12 @@ namespace ABI.System.ComponentModel
 {
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     [Guid("E3DE52F6-1E32-5DA6-BB2D-B5B6096C962D")]
-    public static class PropertyChangedEventHandler
+#if EMBED
+    internal
+#else
+    public
+#endif
+    static class PropertyChangedEventHandler
     {
 #if NETSTANDARD2_0
         private unsafe delegate int Abi_Invoke(IntPtr thisPtr, IntPtr sender, IntPtr e);
