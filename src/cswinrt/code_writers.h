@@ -5947,11 +5947,12 @@ public static Guid PIID = GuidGenerator.CreateIID(typeof(%));)",
 
         auto enum_underlying_type = is_flags_enum(type) ? "uint" : "int";
 
-        w.write(R"(%%public enum % : %
+        w.write(R"(%%% enum % : %
 {
 )", 
         bind<write_winrt_attribute>(type),
         bind<write_type_custom_attributes>(type, true),
+        internal_if_embedded(),
         bind<write_type_name>(type, typedef_name_type::Projected, false), enum_underlying_type);
         {
             for (auto&& field : type.FieldList())
@@ -6001,7 +6002,7 @@ public static Guid PIID = GuidGenerator.CreateIID(typeof(%));)",
             fields.emplace_back(field_info);
         }
 
-        w.write(R"(%%public struct %: IEquatable<%>
+        w.write(R"(%%% struct %: IEquatable<%>
 {
 %
 public %(%)
@@ -6019,6 +6020,7 @@ public override int GetHashCode() => %;
             // struct
             bind<write_winrt_attribute>(type),
             bind<write_type_custom_attributes>(type, true),
+            internal_if_embedded(),
             name,
             name,
             bind_each([](writer& w, auto&& field)
