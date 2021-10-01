@@ -37,7 +37,7 @@ namespace System.IO
         #endregion Constants and static Fields
 
 
-#if !NETSTANDARD2_0
+#if NET
 
         #region Helpers
 

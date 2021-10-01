@@ -87,7 +87,7 @@ namespace WinRT.Interop
 namespace Windows.ApplicationModel.DataTransfer.DragDrop.Core
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -111,7 +111,7 @@ namespace Windows.ApplicationModel.DataTransfer.DragDrop.Core
 namespace Windows.Graphics.Printing
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -141,7 +141,7 @@ namespace Windows.Graphics.Printing
 namespace Windows.Media
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -165,7 +165,7 @@ namespace Windows.Media
 namespace Windows.Media.PlayTo
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -194,7 +194,7 @@ namespace Windows.Media.PlayTo
 namespace Windows.Security.Credentials.UI
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -218,7 +218,7 @@ namespace Windows.Security.Credentials.UI
 namespace Windows.Security.Authentication.Web.Core
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -248,7 +248,7 @@ namespace Windows.Security.Authentication.Web.Core
 namespace Windows.UI.ApplicationSettings
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -284,7 +284,7 @@ namespace Windows.UI.ApplicationSettings
 namespace Windows.UI.Input
 {
 #if UAC_VERSION_3
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.14393.0")]
 #endif
 #if EMBED
@@ -304,7 +304,7 @@ namespace Windows.UI.Input
         }
     }
 
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.14393.0")]
 #endif
 #if EMBED
@@ -328,7 +328,7 @@ namespace Windows.UI.Input
 namespace Windows.UI.Input.Core
 {
 #if UAC_VERSION_4
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.15063.0")]
 #endif
 #if EMBED
@@ -353,7 +353,7 @@ namespace Windows.UI.Input.Core
 namespace Windows.UI.Input.Spatial
 {
 #if UAC_VERSION_2
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10586.0")]
 #endif
 #if EMBED
@@ -377,7 +377,7 @@ namespace Windows.UI.Input.Spatial
 namespace Windows.UI.ViewManagement
 {
 #if UAC_VERSION_1
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED
@@ -396,7 +396,7 @@ namespace Windows.UI.ViewManagement
         }
     }
 
-#if !NETSTANDARD2_0
+#if NET
     [global::System.Runtime.Versioning.SupportedOSPlatform("Windows10.0.10240.0")]
 #endif
 #if EMBED

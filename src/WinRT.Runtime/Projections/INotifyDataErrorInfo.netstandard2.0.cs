@@ -59,7 +59,7 @@ namespace ABI.System.ComponentModel
                 };
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static unsafe int Do_Abi_GetErrors_3(IntPtr thisPtr, IntPtr propertyName, IntPtr* result)
@@ -82,7 +82,7 @@ namespace ABI.System.ComponentModel
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static unsafe int Do_Abi_get_HasErrors_0(IntPtr thisPtr, byte* value)
@@ -107,7 +107,7 @@ namespace ABI.System.ComponentModel
             private readonly static Lazy<global::System.Runtime.CompilerServices.ConditionalWeakTable<global::System.ComponentModel.INotifyDataErrorInfo, global::WinRT.EventRegistrationTokenTable<global::System.EventHandler<global::System.ComponentModel.DataErrorsChangedEventArgs>>>> _ErrorsChanged_TokenTablesLazy = new();
             private static global::System.Runtime.CompilerServices.ConditionalWeakTable<global::System.ComponentModel.INotifyDataErrorInfo, global::WinRT.EventRegistrationTokenTable<global::System.EventHandler<global::System.ComponentModel.DataErrorsChangedEventArgs>>> _ErrorsChanged_TokenTables => _ErrorsChanged_TokenTablesLazy.Value;
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvStdcall)})]
 #endif
             private static unsafe int Do_Abi_add_ErrorsChanged_1(IntPtr thisPtr, IntPtr handler, global::WinRT.EventRegistrationToken* token)
@@ -127,7 +127,7 @@ namespace ABI.System.ComponentModel
                 }
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvStdcall)})]
 #endif
             private static unsafe int Do_Abi_remove_ErrorsChanged_2(IntPtr thisPtr, global::WinRT.EventRegistrationToken token)

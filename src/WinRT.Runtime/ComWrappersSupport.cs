@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using WinRT.Interop;
 
-#if !NETSTANDARD2_0
+#if NET
 using ComInterfaceEntry = System.Runtime.InteropServices.ComWrappers.ComInterfaceEntry;
 #endif
 

@@ -69,7 +69,7 @@ namespace ABI.System.Collections.Specialized
                 _nativeDelegate = nativeDelegate;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             IObjectReference IWinRTObject.NativeObject => _nativeDelegate;
             bool IWinRTObject.HasUnwrappableNativeObject => true;
             ConcurrentDictionary<RuntimeTypeHandle, IObjectReference> IWinRTObject.QueryInterfaceCache { get; } = new();
@@ -108,7 +108,7 @@ namespace ABI.System.Collections.Specialized
 
         public static void DisposeAbi(IntPtr abi) => MarshalInterfaceHelper<global::System.Collections.Specialized.NotifyCollectionChangedEventHandler>.DisposeAbi(abi);
 
-#if !NETSTANDARD2_0
+#if NET
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
 #endif
         private static unsafe int Do_Abi_Invoke(IntPtr thisPtr, IntPtr sender, IntPtr e)

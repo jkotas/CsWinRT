@@ -137,7 +137,7 @@ namespace ABI.WinRT.Interop
                 AbiToProjectionVftablePtr = (IntPtr)nativeVftbl;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_GetGuid_0(IntPtr thisPtr, Guid* guid)
@@ -154,7 +154,7 @@ namespace ABI.WinRT.Interop
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_GetSource_1(IntPtr thisPtr, IntPtr* source)
@@ -175,7 +175,7 @@ namespace ABI.WinRT.Interop
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_GetDescription_2(IntPtr thisPtr, IntPtr* description)
@@ -196,7 +196,7 @@ namespace ABI.WinRT.Interop
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_GetHelpFile_3(IntPtr thisPtr, IntPtr* helpFile)
@@ -217,7 +217,7 @@ namespace ABI.WinRT.Interop
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_GetHelpFileContent_4(IntPtr thisPtr, IntPtr* helpFileContent)
@@ -392,7 +392,7 @@ namespace ABI.WinRT.Interop
                 Marshal.StructureToPtr(AbiToProjectionVftable, (IntPtr)nativeVftbl, false);
                 AbiToProjectionVftablePtr = (IntPtr)nativeVftbl;
             }
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_InterfaceSupportsErrorInfo_0(IntPtr thisPtr, Guid* guid)

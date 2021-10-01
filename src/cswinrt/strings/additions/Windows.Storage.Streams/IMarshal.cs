@@ -94,7 +94,7 @@ namespace ABI.Com
 #endif
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
 #endif
             private static int Do_Abi_GetUnmarshalClass_0(IntPtr thisPtr, Guid* riid, IntPtr pv, global::Com.MSHCTX dwDestContext, IntPtr pvDestContext, global::Com.MSHLFLAGS mshlFlags, Guid* pCid)
@@ -111,7 +111,7 @@ namespace ABI.Com
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
 #endif
             private static int Do_Abi_GetMarshalSizeMax_1(IntPtr thisPtr, Guid* riid, IntPtr pv, global::Com.MSHCTX dwDestContext, IntPtr pvDestContext, global::Com.MSHLFLAGS mshlflags, uint* pSize)
@@ -128,7 +128,7 @@ namespace ABI.Com
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
 #endif
             private static int Do_Abi_MarshalInterface_2(IntPtr thisPtr, IntPtr pStm, Guid* riid, IntPtr pv, global::Com.MSHCTX dwDestContext, IntPtr pvDestContext, global::Com.MSHLFLAGS mshlflags)
@@ -144,7 +144,7 @@ namespace ABI.Com
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
 #endif
             private static int Do_Abi_UnmarshalInterface_3(IntPtr thisPtr, IntPtr pStm, Guid* riid, IntPtr* ppv)
@@ -161,7 +161,7 @@ namespace ABI.Com
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
 #endif
             private static int Do_Abi_ReleaseMarshalData_4(IntPtr thisPtr, IntPtr pStm)
@@ -177,7 +177,7 @@ namespace ABI.Com
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
 #endif
             private static int Do_Abi_DisconnectObject_5(IntPtr thisPtr, uint dwReserved)

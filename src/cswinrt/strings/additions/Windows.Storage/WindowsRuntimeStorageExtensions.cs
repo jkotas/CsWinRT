@@ -23,7 +23,7 @@ namespace System.IO
     static class WindowsRuntimeStorageExtensions
     {
         // Net5-specific extension methods
-#if !NETSTANDARD2_0
+#if NET
         [global::System.Runtime.Versioning.SupportedOSPlatform("windows10.0.10240.0")]
         public static Task<Stream> OpenStreamForReadAsync(this IStorageFile windowsRuntimeFile)
         {

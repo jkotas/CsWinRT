@@ -67,7 +67,7 @@ namespace ABI.WinRT.Interop
                 Marshal.StructureToPtr(AbiToProjectionVftable, AbiToProjectionVftablePtr, false);
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_Resolve(IntPtr thisPtr, Guid* riid, IntPtr* objectReference)

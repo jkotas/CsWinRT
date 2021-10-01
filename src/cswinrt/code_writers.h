@@ -5709,7 +5709,7 @@ public NativeDelegateWrapper(ObjectReference<global::WinRT.Interop.IDelegateVftb
 _nativeDelegate = nativeDelegate;
 }
 
-#if !NETSTANDARD2_0
+#if NET
 IObjectReference IWinRTObject.NativeObject => _nativeDelegate;
 bool IWinRTObject.HasUnwrappableNativeObject => true;
 global::System.Collections.Concurrent.ConcurrentDictionary<global::System.RuntimeTypeHandle, IObjectReference> IWinRTObject.QueryInterfaceCache { get; } = new();

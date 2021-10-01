@@ -5,7 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Reflection;
 
-#if !NETSTANDARD2_0
+#if NET
 using System.Runtime.Loader;
 [assembly: global::System.Runtime.Versioning.SupportedOSPlatform("Windows")]
 #endif

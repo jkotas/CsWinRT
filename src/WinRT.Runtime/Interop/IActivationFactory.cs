@@ -56,7 +56,7 @@ namespace ABI.WinRT.Interop
                 };
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly(CallConvs = new [] { typeof(CallConvStdcall) })]
 #endif
             private static unsafe int Do_Abi_ActivateInstance_0(IntPtr thisPtr, IntPtr* result)

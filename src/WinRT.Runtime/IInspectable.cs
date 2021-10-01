@@ -68,7 +68,7 @@ namespace WinRT
                 Marshal.StructureToPtr(AbiToProjectionVftable, AbiToProjectionVftablePtr, false);
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_GetIids(IntPtr pThis, int* iidCount, IntPtr* iids)
@@ -86,7 +86,7 @@ namespace WinRT
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private unsafe static int Do_Abi_GetRuntimeClassName(IntPtr pThis, IntPtr* className)
@@ -104,7 +104,7 @@ namespace WinRT
                 return 0;
             }
 
-#if !NETSTANDARD2_0
+#if NET
             [UnmanagedCallersOnly]
 #endif
             private static int Do_Abi_GetTrustLevel(IntPtr pThis, TrustLevel* trustLevel)

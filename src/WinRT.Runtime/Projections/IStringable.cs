@@ -38,7 +38,7 @@ namespace ABI.Windows.Foundation
             AbiToProjectionVftablePtr = (IntPtr)nativeVftbl;
         }
 
-#if !NETSTANDARD2_0
+#if NET
         [UnmanagedCallersOnly]
 #endif
         private static unsafe int Do_Abi_ToString_0(IntPtr thisPtr, IntPtr* value)
