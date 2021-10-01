@@ -18,11 +18,11 @@ namespace WinRT
         private bool disposed;
 
  #if EMBED
-        protected unsafe AgileReference(IObjectReference instance)
+        internal 
 #else
-        public unsafe AgileReference(IObjectReference instance)
+        public 
 #endif 
-        
+        unsafe AgileReference(IObjectReference instance) 
         {
             if(instance?.ThisPtr == null)
             {
@@ -55,7 +55,7 @@ namespace WinRT
         }
 
 #if EMBED
-        protected
+        internal 
 #else
         public
 #endif
@@ -124,7 +124,7 @@ namespace WinRT
     {
 
 #if EMBED
-        internal // protected
+        internal 
 #else
         public
 #endif
@@ -134,7 +134,7 @@ namespace WinRT
         }
 
 #if EMBED
-        internal // protected
+        internal
 #else
         public
 #endif

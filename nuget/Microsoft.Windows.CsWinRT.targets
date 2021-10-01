@@ -102,9 +102,11 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 -include WinRT.Interop
       </CsWinRTIncludeWinRTInterop>
       <CsWinRTEmbeddedParam Condition="'$(CsWinRTEmbedded)' == 'true'">-embedded</CsWinRTEmbeddedParam>
+      <CsWinRTExeTFM Condition="'$(TargetFramework)' == 'netcoreapp3.1'">netstandard2.0</CsWinRTExeTFM>
+      <CsWinRTExeTFM Condition="'$(CsWinRTExeTFM)' == ''">$(TargetFramework)</CsWinRTExeTFM>
       <CsWinRTParams Condition="'$(CsWinRTParams)' == ''">
 $(CsWinRTCommandVerbosity)
--target $(TargetFramework)
+-target $(CsWinRTExeTFM)
 $(CsWinRTWindowsMetadataInput)
 -input @(CsWinRTInputs->'"%(FullPath)"', ' ')
 -output "$(CsWinRTGeneratedFilesDir.TrimEnd('\'))"
