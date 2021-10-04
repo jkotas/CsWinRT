@@ -30,7 +30,7 @@ namespace ABI.WinRT.Interop
         public struct Vftbl
         {
             internal IInspectable.Vftbl IInspectableVftbl;
-#if NETSTANDARD2_0
+#if !NET
             private delegate int ActivateInstance_Delegate(IntPtr thisPtr, IntPtr* pobj);
             private void* _ActivateInstance_0;
             public delegate* unmanaged[Stdcall]<IntPtr, IntPtr*, int> ActivateInstance_0 { get => (delegate* unmanaged[Stdcall]<IntPtr, IntPtr*, int>)_ActivateInstance_0; set => _ActivateInstance_0 = value; }
@@ -39,7 +39,7 @@ namespace ABI.WinRT.Interop
 #endif
             public static readonly IntPtr AbiToProjectionVftablePtr;
 
-#if NETSTANDARD2_0
+#if !NET
             private static readonly Delegate[] DelegateCache = new Delegate[1];
 #endif
             static unsafe Vftbl()
@@ -48,7 +48,7 @@ namespace ABI.WinRT.Interop
                 (*(Vftbl*)AbiToProjectionVftablePtr) = new Vftbl
                 {
                     IInspectableVftbl = global::WinRT.IInspectable.Vftbl.AbiToProjectionVftable,
-#if NETSTANDARD2_0
+#if !NET
                     _ActivateInstance_0 = (void*)Marshal.GetFunctionPointerForDelegate(DelegateCache[0] = new ActivateInstance_Delegate(Do_Abi_ActivateInstance_0))
 #else
                     ActivateInstance_0 = &Do_Abi_ActivateInstance_0

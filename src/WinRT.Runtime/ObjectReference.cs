@@ -144,7 +144,7 @@ namespace WinRT
                 }
             }
 
-#if NETSTANDARD2_0
+#if !NET
             return (TInterface)typeof(TInterface).GetHelperType().GetConstructor(new[] { typeof(IObjectReference) }).Invoke(new object[] { this });
 #else
             return (TInterface)(object)new WinRT.IInspectable(this);
@@ -420,7 +420,7 @@ namespace WinRT
             // Since it is a JIT time constant, this function will be branchless on .NET 5.
             // On .NET Standard 2.0, the IsReferenceOrContainsReferences method does not exist,
             // so we instead fall back to typeof(T).IsGenericType, which sadly is not a JIT-time constant.
-#if NETSTANDARD2_0
+#if !NET
             if (typeof(T).IsGenericType)
 #else
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())

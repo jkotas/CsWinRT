@@ -44,7 +44,7 @@ namespace ABI.WinRT.Interop
         {
             internal global::WinRT.Interop.IUnknownVftbl IUnknownVftbl;
 
-#if NETSTANDARD2_0
+#if !NET
             private void* _GetUnmarshalClass_0;
             public delegate* unmanaged[Stdcall]<IntPtr, Guid*, IntPtr, global::WinRT.Interop.MSHCTX, IntPtr, global::WinRT.Interop.MSHLFLAGS, Guid*, int> GetUnmarshalClass_0 { get => (delegate* unmanaged[Stdcall]<IntPtr, Guid*, IntPtr, global::WinRT.Interop.MSHCTX, IntPtr, global::WinRT.Interop.MSHLFLAGS, Guid*, int>)_GetUnmarshalClass_0; set => _GetUnmarshalClass_0 = value; }
             private void* _GetMarshalSizeMax_1;
@@ -73,7 +73,7 @@ namespace ABI.WinRT.Interop
 
             static Vftbl()
             {
-#if NETSTANDARD2_0
+#if !NET
                 AbiToProjectionVftable = new Vftbl
                 {
                     IUnknownVftbl = global::WinRT.Interop.IUnknownVftbl.AbiToProjectionVftbl,

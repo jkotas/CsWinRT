@@ -5696,7 +5696,7 @@ return abiDelegate is null ? null : (%)ComWrappersSupport.TryRegisterObjectForIn
 }
 
 [global::WinRT.ObjectReferenceWrapper(nameof(_nativeDelegate))]
-#if NETSTANDARD2_0
+#if !NET
 private class NativeDelegateWrapper
 #else
 private class NativeDelegateWrapper : IWinRTObject

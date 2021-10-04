@@ -56,7 +56,7 @@ namespace WinRT.Host
             }
         }
 
-#if NETSTANDARD2_0
+#if !NET
         private static class ActivationLoader
         {
             public static Assembly LoadAssembly(string targetAssembly) => Assembly.LoadFrom(targetAssembly);

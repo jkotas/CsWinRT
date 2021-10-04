@@ -549,7 +549,7 @@ namespace WinRT
                 IWeakReference target = null;
                 try
                 {
-#if NETSTANDARD2_0
+#if !NET
                     var weakRefSource = (IWeakReferenceSource)typeof(IWeakReferenceSource).GetHelperType().GetConstructor(new[] { typeof(IObjectReference) }).Invoke(new object[] { obj });
 #else
                     var weakRefSource = (IWeakReferenceSource)(object)new WinRT.IInspectable(obj);
@@ -588,7 +588,7 @@ namespace WinRT
             {
                 if (caches.TryGetValue(thisPtr, out var cache))
                 {
-#if NETSTANDARD2_0
+#if !NET
                     // https://devblogs.microsoft.com/pfxteam/little-known-gems-atomic-conditional-removals-from-concurrentdictionary/
                     ((ICollection<KeyValuePair<int, System.WeakReference<State>>>)cache.states).Remove(
                         new KeyValuePair<int, System.WeakReference<State>>(index, state));

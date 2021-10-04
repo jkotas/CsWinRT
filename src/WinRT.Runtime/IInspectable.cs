@@ -42,7 +42,7 @@ namespace WinRT
             public static readonly Vftbl AbiToProjectionVftable;
             public static readonly IntPtr AbiToProjectionVftablePtr;
 
-#if NETSTANDARD2_0
+#if !NET
             private static readonly Delegate[] DelegateCache = new Delegate[3];
             private delegate int _GetIidsDelegate(IntPtr pThis, int* iidCount, IntPtr* iids);
             private delegate int _GetRuntimeClassNameDelegate(IntPtr pThis, IntPtr* className);
@@ -54,7 +54,7 @@ namespace WinRT
                 AbiToProjectionVftable = new Vftbl
                 {
                     IUnknownVftbl = IUnknownVftbl.AbiToProjectionVftbl,
-#if NETSTANDARD2_0
+#if !NET
                     _GetIids = (void*)Marshal.GetFunctionPointerForDelegate(DelegateCache[0] = new _GetIidsDelegate(Do_Abi_GetIids)),
                     _GetRuntimeClassName = (void*)Marshal.GetFunctionPointerForDelegate(DelegateCache[1] = new _GetRuntimeClassNameDelegate(Do_Abi_GetRuntimeClassName)),
                     _GetTrustLevel = (void*)Marshal.GetFunctionPointerForDelegate(DelegateCache[2] = new _GetTrustLevelDelegate(Do_Abi_GetTrustLevel))

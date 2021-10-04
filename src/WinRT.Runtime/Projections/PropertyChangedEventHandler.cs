@@ -18,7 +18,7 @@ namespace ABI.System.ComponentModel
 #endif
     static class PropertyChangedEventHandler
     {
-#if NETSTANDARD2_0
+#if !NET
         private unsafe delegate int Abi_Invoke(IntPtr thisPtr, IntPtr sender, IntPtr e);
 #endif
 
@@ -30,7 +30,7 @@ namespace ABI.System.ComponentModel
             AbiToProjectionVftable = new global::WinRT.Interop.IDelegateVftbl
             {
                 IUnknownVftbl = global::WinRT.Interop.IUnknownVftbl.AbiToProjectionVftbl,
-#if NETSTANDARD2_0
+#if !NET
                 Invoke = Marshal.GetFunctionPointerForDelegate(AbiInvokeDelegate = (Abi_Invoke)Do_Abi_Invoke)
 #else
                 Invoke = (IntPtr)(delegate* unmanaged[Stdcall]<IntPtr, IntPtr, IntPtr, int>)&Do_Abi_Invoke
@@ -55,7 +55,7 @@ namespace ABI.System.ComponentModel
         }
 
         [global::WinRT.ObjectReferenceWrapper(nameof(_nativeDelegate))]
-#if NETSTANDARD2_0
+#if !NET
         private class NativeDelegateWrapper
 #else
         private class NativeDelegateWrapper : IWinRTObject
@@ -78,7 +78,7 @@ namespace ABI.System.ComponentModel
             public unsafe void Invoke(object sender, global::System.ComponentModel.PropertyChangedEventArgs e)
             {
                 IntPtr ThisPtr = _nativeDelegate.ThisPtr;
-#if NETSTANDARD2_0
+#if !NET
                 var abiInvoke = Marshal.GetDelegateForFunctionPointer<Abi_Invoke>(_nativeDelegate.Vftbl.Invoke);
 #else
                 var abiInvoke = (delegate* unmanaged[Stdcall]<IntPtr, IntPtr, IntPtr, int>)(_nativeDelegate.Vftbl.Invoke);
