@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- Target .NET Core 2.0 to test .NET Standard 2 Projection -->
-    <TargetFrameworks>netcoreapp2.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
     <Platforms>x64;x86</Platforms>
     <IsPackable>false</IsPackable>
     <LangVersion>9</LangVersion>
