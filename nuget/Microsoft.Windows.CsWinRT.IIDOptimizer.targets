@@ -5,6 +5,13 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 -->
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <!-- Only run on .NET 5.0 and later -->
+  <PropertyGroup>
+      <IsTargetFrameworkNet5OrGreater>false</IsTargetFrameworkNet5OrGreater>
+      <IsTargetFrameworkNet5OrGreater Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0'">true</IsTargetFrameworkNet5OrGreater>
+      <GuidPatchCanOptimize>false</GuidPatchCanOptimize>
+      <GuidPatchCanOptimize Condition="'$(DesignTimeBuild)' == '' And '$(IsTargetFrameworkNet5OrGreater)' == 'true'">true</GuidPatchCanOptimize>
+  </PropertyGroup>
 
   <!-- For the IIDOptimizer to work, it needs to be given all the (reference) assemblies used during compilation 
        This target consolidates them based on an item group output by the CoreCompile target,  
@@ -12,7 +19,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   <Target Name="CsWinRTGenerateIIDOptimizerResponseFile" 
           AfterTargets="Compile" 
           BeforeTargets="CsWinRTInvokeGuidPatcher"
-          Condition="'$(DesignTimeBuild)' == ''">
+          Condition="$(GuidPatchCanOptimize)">
     
     <PropertyGroup> 
       <!-- CsWinRTIIDOptimizerPath: If building in the CsWinRT Repo, then this is set already via Directory.Build.props  --> 
@@ -50,7 +57,7 @@ $(GuidPatchTargetAssemblyReferences)
 
   <!-- Run the IIDOptimizer on the projection .dll -->
   <Target Name="CsWinRTInvokeGuidPatcher" 
-          Condition="'$(DesignTimeBuild)' == ''"
+          Condition="$(GuidPatchCanOptimize)"
           AfterTargets="Compile" 
           BeforeTargets="Link" 
           DependsOnTargets="CsWinRTGenerateIIDOptimizerResponseFile">  
@@ -66,7 +73,7 @@ $(GuidPatchTargetAssemblyReferences)
 
   <!-- When the IIDOptimizer succeeds, replace the input .dll with the patched version -->
   <Target Name="CsWinRTReplaceForPatchedRuntime" 
-          Condition="$(CsWinRTGuidPatchExitCode) == 0"
+          Condition="$(GuidPatchCanOptimize) And $(CsWinRTGuidPatchExitCode) == 0"
           AfterTargets="CsWinRTInvokeGuidPatcher"
           BeforeTargets="Link"
           DependsOnTargets="CsWinRTInvokeGuidPatcher">

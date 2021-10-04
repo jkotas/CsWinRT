@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
     <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
@@ -10,7 +10,35 @@
       Alpha;
       Beta;
       Gamma;
-      Windows.Devices.Geolocation; 
+      Windows.Devices.Geolocation;
+      Windows.Foundation.Metadata.ContractVersion;
+      Windows.Foundation.Metadata.OverloadAttribute;
+      Windows.Foundation.UniversalApiContract;
+      Windows.Foundation.Metadata.DualApiPartition;
+      Windows.Foundation.Metadata.MarshalingBehavior;
+      Windows.Foundation.Metadata.MarshalingType;
+      Windows.Foundation.Metadata.Activatable;
+      Windows.Foundation.Metadata.Static;
+      Windows.Foundation.Metadata.Threading;
+      Windows.Foundation.Metadata.ThreadingModel;
+      Windows.Foundation.Metadata.Muse;
+      Windows.Foundation.Metadata.ExclusiveTo;
+      Windows.Foundation.Metadata.ApiContract;
+      Windows.Foundation.Metadata.AttributeName;
+      Windows.Foundation.Metadata.AllowMultiple;
+      Windows.Foundation.IAsyncOperation;
+      Windows.Foundation.TypedEventHandler;
+      Windows.Foundation.UniversalApiContract;
+      Windows.Foundation.FoundationContract;
+      Windows.Foundation.IAsyncInfo;
+      Windows.Foundation.IAsyncAction;
+      Windows.Foundation.AsyncStatus;
+      Windows.Foundation.AsyncActionCompletedHandler;
+      Windows.Foundation.AsyncActionProgressHandler;
+      Windows.Foundation.AsyncActionWithProgressCompletedHandler;
+      Windows.Foundation.AsyncOperationProgressHandler;
+      Windows.Foundation.AsyncOperationCompletedHandler;
+      Windows.Foundation.AsyncOperationWithProgressCompletedHandler;
     </CsWinRTIncludes>
 
     <!-- every customer has to use C# 9 because of WinRT.Runtime sources ... -->
@@ -20,7 +48,7 @@
     <CsWinRTGenerateProjection>true</CsWinRTGenerateProjection>
   </PropertyGroup>
 
-  <ItemGroup>
+ -<ItemGroup>
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="0.4.1-private.0" PrivateAssets="All" />
   </ItemGroup>
 
