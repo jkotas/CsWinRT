@@ -120,11 +120,17 @@ namespace UnitTest
             TestObject.CallForEnums(() => expectedEnums);
             Assert.Equal(expectedEnums, TestObject.EnumsProperty);
 
+            TestObject.EnumsProperty = null;
+            Assert.Equal(null, TestObject.EnumsProperty);
+
             var expectedEnumStructs = new EnumStruct[] { new EnumStruct(EnumValue.One), new EnumStruct(EnumValue.Two) };
             TestObject.EnumStructsProperty = expectedEnumStructs;
             Assert.Equal(expectedEnumStructs, TestObject.EnumStructsProperty);
             TestObject.CallForEnumStructs(() => expectedEnumStructs);
             Assert.Equal(expectedEnumStructs, TestObject.EnumStructsProperty);
+
+            TestObject.EnumStructsProperty = null;
+            Assert.Equal(null, TestObject.EnumStructsProperty);
 
             // Flags
             var expectedFlag = FlagValue.All;
@@ -1167,6 +1173,17 @@ namespace UnitTest
             Assert.True(val.bools.x);
             Assert.False(val.bools.y);
             Assert.True(val.bools.z);
+        }
+
+        [Fact]
+        public void TestBlittableArrays()
+        {
+            int[] arr = new[] { 2, 4, 6, 8 };
+            TestObject.SetInts(arr);
+            Assert.True(TestObject.GetInts().SequenceEqual(arr));
+
+            TestObject.SetInts(null);
+            Assert.Null(TestObject.GetInts());
         }
 
 #if NETCOREAPP2_0
@@ -2535,6 +2552,8 @@ namespace UnitTest
         {
             bool eventCalled = false;
             void Class_StaticIntPropertyChanged(object sender, int e) => eventCalled = (e == 3);
+            bool eventCalled2 = false;
+            void Class_StaticIntPropertyChanged2(object sender, int e) => eventCalled2 = (e == 3);
 
             // Test static codegen-based EventSource caching
             Class.StaticIntPropertyChanged += Class_StaticIntPropertyChanged;
@@ -2548,6 +2567,21 @@ namespace UnitTest
             GC.WaitForPendingFinalizers();
             Class.StaticIntProperty = 3;
             Assert.True(eventCalled);
+            eventCalled = false;
+
+            // Test adding another delegate to validate COM reference tracking in EventSource
+            Class.StaticIntPropertyChanged += Class_StaticIntPropertyChanged2;
+            Class.StaticIntProperty = 3;
+            Assert.True(eventCalled);
+            Assert.True(eventCalled2);
+            GC.Collect(2, GCCollectionMode.Forced, true);
+            GC.WaitForPendingFinalizers();
+            eventCalled = false;
+            eventCalled2 = false;
+            Class.StaticIntPropertyChanged -= Class_StaticIntPropertyChanged;
+            Class.StaticIntProperty = 3;
+            Assert.False(eventCalled);
+            Assert.True(eventCalled2);
 
             // Test dynamic WeakRef-based EventSource caching
             eventCalled = false;
@@ -2591,6 +2625,43 @@ namespace UnitTest
             public void IntPropertyChanged(object sender, int e) => eventCalled();
         }
 
+        // Test scenario where events may be removed by the native event source without an unsubscribe.
+        [Fact]
+        public void TestEventRemovalByEventSource()
+        {
+            bool eventCalled = false;
+            void Class_IntPropertyChanged(object sender, int e) => eventCalled = (e == 3);
+            bool eventCalled2 = false;
+            void Class_IntPropertyChanged2(object sender, int e) => eventCalled2 = (e == 3);
+
+            var classInstance = new Class();
+            classInstance.IntPropertyChanged += Class_IntPropertyChanged;
+            classInstance.IntProperty = 3;
+            Assert.True(eventCalled);
+            Assert.False(eventCalled2);
+            eventCalled = false;
+            classInstance.RemoveLastIntPropertyChangedHandler();
+            classInstance.IntPropertyChanged += Class_IntPropertyChanged2;
+            classInstance.IntProperty = 3;
+            Assert.False(eventCalled);
+            Assert.True(eventCalled2);
+            eventCalled2 = false;
+
+            classInstance.RemoveLastIntPropertyChangedHandler();
+            GC.Collect(2, GCCollectionMode.Forced, true);
+            GC.WaitForPendingFinalizers();
+            classInstance.IntPropertyChanged += Class_IntPropertyChanged;
+            classInstance.IntProperty = 3;
+            Assert.True(eventCalled);
+            Assert.False(eventCalled2);
+            eventCalled = false;
+
+            classInstance.IntPropertyChanged += Class_IntPropertyChanged2;
+            classInstance.IntProperty = 3;
+            Assert.True(eventCalled);
+            Assert.True(eventCalled2);
+        }
+
         [Fact]
         private async Task TestPnpPropertiesInLoop()
         {
@@ -2621,7 +2692,7 @@ namespace UnitTest
                 foreach (var key in prop.Keys)
                 {
                     var val = prop[key];
-                    if (key == "System.Devices.ContainerId" && val != null)
+                    if (string.CompareOrdinal(key, "System.Devices.ContainerId") == 0 && val != null)
                     {
                         var val4 = pnpObject.Properties[key];
                         if (val is not Guid || val4 is not Guid)
@@ -2629,7 +2700,7 @@ namespace UnitTest
                             throw new Exception("Incorrect value type Guid. Actual type: " + val.GetType() + "  " + val4.GetType());
                         }
                     }
-                    if (key == "System.Devices.Parent" && val != null)
+                    if (string.CompareOrdinal(key, "System.Devices.Parent") == 0 && val != null)
                     {
                         var val4 = pnpObject.Properties[key];
                         if (val is not string || val4 is not string)
