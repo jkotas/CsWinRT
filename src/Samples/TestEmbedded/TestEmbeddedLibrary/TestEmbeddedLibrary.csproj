@@ -1,10 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
     <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <LangVersion>9</LangVersion>
+    <CsWinRTEmbedded>true</CsWinRTEmbedded>
+    <CsWinRTWindowsMetadata>10.0.19041.0</CsWinRTWindowsMetadata>
+    <CsWinRTGenerateProjection>true</CsWinRTGenerateProjection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="0.4.1-private.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\C++ Components\Alpha\Alpha.vcxproj" />
+    <ProjectReference Include="..\C++ Components\Beta\Beta.vcxproj"  />
+    <ProjectReference Include="..\C++ Components\Gamma\Gamma.vcxproj"  />
+  </ItemGroup> 
+    
   <PropertyGroup>
     <CsWinRTIncludes>
       Alpha;
@@ -40,22 +57,6 @@
       Windows.Foundation.AsyncOperationCompletedHandler;
       Windows.Foundation.AsyncOperationWithProgressCompletedHandler;
     </CsWinRTIncludes>
-
-    <!-- every customer has to use C# 9 because of WinRT.Runtime sources ... -->
-    <LangVersion>9</LangVersion>
-    <CsWinRTEmbedded>true</CsWinRTEmbedded>
-    <CsWinRTWindowsMetadata>10.0.19041.0</CsWinRTWindowsMetadata>
-    <CsWinRTGenerateProjection>true</CsWinRTGenerateProjection>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="0.4.1-private.0" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\C++ Components\Alpha\Alpha.vcxproj" />
-    <ProjectReference Include="..\C++ Components\Beta\Beta.vcxproj"  />
-    <ProjectReference Include="..\C++ Components\Gamma\Gamma.vcxproj"  />
-  </ItemGroup> 
-  
+ 
 </Project>

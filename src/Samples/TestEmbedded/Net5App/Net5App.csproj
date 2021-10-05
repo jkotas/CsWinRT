@@ -4,10 +4,6 @@
     <OutputType>Exe</OutputType>
     <Platforms>x64;x86</Platforms>
     <TargetFramework>net5.0</TargetFramework>
-    <CsWinRTGenerateProjection>false</CsWinRTGenerateProjection>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <CsWinRTWindowsMetadata>10.0.19041.0</CsWinRTWindowsMetadata>
   </PropertyGroup>
   
@@ -16,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TestEmbeddedLibrary\TestEmbeddedLibrary.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\TestEmbeddedLibrary\TestEmbeddedLibrary.csproj"  />
   </ItemGroup>
 
 </Project>
