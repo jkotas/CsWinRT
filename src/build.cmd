@@ -150,12 +150,22 @@ if ErrorLevel 1 (
 )
 if "%cswinrt_build_only%"=="true" goto :eof
 
+:buildembedded
+echo Building embedded sample for %cswinrt_platform% %cswinrt_configuration%
+call :exec %nuget_dir%\nuget.exe restore %nuget_params% %this_dir%Samples\TestEmbedded\TestEmbedded.sln
+call :exec %msbuild_path%msbuild.exe %this_dir%\Samples\TestEmbedded\TestEmbedded.sln /t:restore /p:platform=%cswinrt_platform%;configuration=%cswinrt_configuration%
+call :exec %msbuild_path%msbuild.exe %this_dir%\Samples\TestEmbedded\TestEmbedded.sln /p:platform=%cswinrt_platform%;configuration=%cswinrt_configuration% /bl:embeddedsample.binlog
+if ErrorLevel 1 (
+  echo.
+  echo ERROR: Embedded build failed
+  exit /b !ErrorLevel!
+)
+
 rem Tests are not yet enabled for ARM builds (not supported by Project Reunion)
 if %cswinrt_platform%==arm goto :eof
 if %cswinrt_platform%==arm64 goto :eof
 
 :test
-:unittest
 rem Build/Run xUnit tests, generating xml output report for Azure Devops reporting, via XunitXml.TestLogger NuGet
 if %cswinrt_platform%==x86 (
   set dotnet_exe="%DOTNET_ROOT(86)%\dotnet.exe"
@@ -170,6 +180,15 @@ if not exist %dotnet_exe% (
   )
 )
 
+:embeddedtests
+:: build the embedded sample and run the unittest 
+call :exec %dotnet_exe% test --verbosity normal --no-build --logger xunit;LogFilePath=%~dp0embedunittest_%cswinrt_version_string%.xml %this_dir%Samples/TestEmbedded/UnitTestEmbedded/UnitTestEmbedded.csproj /nologo /m /p:platform=%cswinrt_platform%;configuration=%cswinrt_configuration%
+if ErrorLevel 1 (
+  echo.
+  echo ERROR: Embedded unit test failed, skipping NuGet pack
+  exit /b !ErrorLevel!
+)
+
 :objectlifetimetests
 rem Running Object Lifetime Unit Tests
 echo Running object lifetime tests for %cswinrt_platform% %cswinrt_configuration%
@@ -181,6 +200,7 @@ if ErrorLevel 1 (
   exit /b !ErrorLevel!
 )
 
+:unittest
 rem WinUI NuGet package's Microsoft.WinUI.AppX.targets attempts to import a file that does not exist, even when
 rem executing "dotnet test --no-build ...", which evidently still needs to parse and load the entire project.
 rem Work around by using a dummy targets file and assigning it to the MsAppxPackageTargets property.
@@ -209,7 +229,7 @@ echo Running cswinrt authoring tests for %cswinrt_platform% %cswinrt_configurati
 call :exec %this_dir%_build\%cswinrt_platform%\%cswinrt_configuration%\AuthoringConsumptionTest\bin\AuthoringConsumptionTest.exe --gtest_output=xml:%this_dir%hosttest_%cswinrt_version_string%.xml 
 if ErrorLevel 1 (
   echo.
-  echo ERROR: Authoring test failed, skipping NuGet pack
+  echo ERROR: Authoring test failed, skipping NuGet pac
   exit /b !ErrorLevel!
 )
 
